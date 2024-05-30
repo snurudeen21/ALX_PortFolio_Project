@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SoilReport Lab</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	
+
+	<marquee behavior="scroll" direction="left" scrollamount="10" scrolldelay="5">Welcome to Soil Analysis Tool! Explore our features and get started with your soil analysis today!</marquee>
+	
+	<h1 style="width: 500px;">Soil Analysis Tool</h1>
+
+	
+
+	<div class="container">
+
+	<div class="form-container">
+	<form>
+
+	<input type="file" id="file_path" name="file_path" placeholder="Upload Sieve Analysis Data" accept=".xlsx, .xls" required>
+	<label for="file_path">
+  		<i class="fa fa-upload" aria-hidden="true"></i>
+	</label>
+
+	<label for="%passing sieve 5mm">%passing sieve 5mm</label>
+	<input type="number" id="%passing sieve 5mm" name="sieveSize5mm" placeholder="%passing sieve 5mm" min="0" pattern="^[0-9]+(\.[0-9]+)?$" required>
+	
+	<label for="%passing sieve 2mm">%passing sieve 2mm</label>
+	<input type="number" id="%passing sieve 2mm" name="sieveSize2mm" placeholder="%passing sieve 2mm" min="0" pattern="^[0-9]+(\.[0-9]+)?$" required>
+	
+	<label for="%passing sieve 425 micrometer">%passing sieve 425 micrometer</label>
+	<input type="number" id="%passing sieve 425 micrometer" name="sieveSize425 micrometer" placeholder="%passing sieve 425 micrometer" min="0" pattern="^[0-9]+(\.[0-9]+)?$" required>
+	
+	<label for="%passing sieve 75 micrometer">%passing sieve 75 micrometer</label>
+	<input type="number" id="%passing sieve 75 micrometer" name="sieveSize75 micrometer" placeholder="%passing sieve 75 micrometer min="0" pattern="^[0-9]+(\.[0-9]+)?$" required" required>
+	
+	<label for="liquidLimit">Liquid Limit</label>
+	<input type="number" id="liquidLimit" name="liquidLimit" placeholder="liquidLimit" min="0" pattern="^[0-9]+(\.[0-9]+)?$" required>
+        
+        <label for="plasticLimit">Plastic Limit</label>
+        <input type="number" id="plasticLimit" name="plasticLimit" placeholder="plasticLimit" min="0" pattern="^[0-9]+(\.[0-9]+)?$" required>
+        
+        <button type="submit">Submit</button>
+
+	</form>
+	</div>
+
+	<div class="graph-wrapper">
+		<div class="graph-container">
+		  <canvas id="myGraph" width="600" height="400"></canvas>
+		</div>
+		<button id="download-btn">Download Report</button>
+	  </div>	  
+
+	<div class="report-container">
+		<p> My Reports are coming in Here</p>
+	</div>
+	
+	</div>
+
+	
+</body>
+</html>
