@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+</head>
+<body>
+
+    <h1>Upload File</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload">  
+    </form>   
+  
+    <form action="/generate" method="POST" enctype="multipart/form-data">
+        <input type="number" step="0.001" name="5mm" id="myInput1" min="0" required>
+        <input type="number" step="0.001" name="2mm" id="myInput2" min="0" required>
+        <input type="number" step="0.001" name="425micro_m" id="myInput3" min="'0" required>
+        <input type="number" step="0.001" name="75micro_m" id="myInput4" min="0" required>
+        
+        
+
+        <label for="liquidLimit">Liquid Limit</label>
+        <input type="number" step="0.001" id="liquidLimit" name="liquidLimit" placeholder="liquidLimit" min="0" required>
+    
+        <label for="plasticLimit">Plastic Limit</label>
+        <input type="number" step="0.001" id="plasticLimit" name="plasticLimit" placeholder="plasticLimit" min="0" required>
+    
+        <input type="submit" value="Analyze">
+    </form>
+
+    <img src="{{ url_for('static', filename='out_put_graph.png') }}" alt="gradation curve">
+
+
+    <a href="/download/soil_report.pdf">Download PDF</a>
+
+
+    {% if message %}
+        <h2>{{ message }}</h2>
+        <h3>{{file_path}}</h3>
+    {% endif %}
+
+    <h4>LL: {{ liquid_limit }} PL: {{ plastic_limit }}  5mm: {{ _5mm }}</h4>
+    <h4>{{ file_path }}</h4>
+    <h4>{{ cu0 }}</h4>
+    <h4>{{ aashto_class }}</h4>
+    <h4>{{ uscs_class }}</h4>
+    <h4>{{ finess_mod }}</h4>
+    <h4>{{ pdf_file }}</h4>
+
+</body>
+</html>

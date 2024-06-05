@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Upload</title>
+    
+</head>
+<body>
+
+    <h1>Upload File</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload"> 
+        <input type="text" name="file_path" id="myInput5"> 
+
+    </form>
+    
+    <form action="/generate" method="post" enctype="multipart/form-data">
+        <input type="number" step="0.001" name="5mm" id="myInput1" required>
+        <input type="number" step="0.001" name="2mm" id="myInput2" required>
+        <input type="number" step="0.001" name="425micro_m" id="myInput3" required>
+        <input type="number" step="0.001" name="75micro_m" id="myInput4" required>
+        
+        
+        <script>
+            window.onload = function() {
+                var myValue1 = "{{ passing_sieve_5mm }}";
+                var myValue2 = "{{ passing_sieve_2mm }}";
+                var myValue3 = "{{ passing_sieve_425micro_m }}";
+                var myValue4 = "{{ passing_sieve_75micro_m }}";
+                document.getElementById("myInput1").value = myValue1;
+                document.getElementById("myInput2").value = myValue2;
+                document.getElementById("myInput3").value = myValue3;
+                document.getElementById("myInput4").value = myValue4;
+            }
+        </script>
+
+        <label for="liquidLimit">Liquid Limit</label>
+        <input type="number" step="0.001" id="liquidLimit" name="liquidLimit" placeholder="liquidLimit" min="0" required>
+    
+        <label for="plasticLimit">Plastic Limit</label>
+        <input type="number" step="0.001" id="plasticLimit" name="plasticLimit" placeholder="plasticLimit" min="0" required>
+    
+        <button type="submit">Analyze</button>
+    </form>
+    {% if message %}
+        <h2>{{ message }}</h2>
+        <h3>{{file_path}}</h3>
+    {% endif %}
+
+    <h4>LL: {{ liquid_limit }} PL: {{ plastic_limit }}</h4>
+</body>
+</html>
