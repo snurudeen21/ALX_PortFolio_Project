@@ -32,7 +32,7 @@
     <img src="{{ url_for('static', filename='out_put_graph.png') }}" alt="gradation curve">
 
 
-    <a href="/download/soil_report.pdf">Download PDF</a>
+    <input type="button" value="Download PDF" onclick="window.location.href='/download/your_file.pdf'">
 
 
     {% if message %}
