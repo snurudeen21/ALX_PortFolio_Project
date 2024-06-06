@@ -9,7 +9,7 @@ idna==2.10
 Jinja2==3.0.1
 kiwisolver==1.4.4
 MarkupSafe==2.0.1
-matplotlib==3.6.3
+matplotlib
 mysqlclient==2.2.4
 numpy==1.24.2
 packaging==23.0
@@ -18,12 +18,12 @@ Pillow<=9.0.0
 pyparsing==3.0.9
 python-dateutil==2.8.2
 pytz==2023.3
-reportlab==3.6.12
+reportlab
 requests==2.25.1
 scipy==1.10.1
 six==1.16.0
 spark-parser==1.8.9
-tkdesigner==1.0.7
+tkdesigner
 tzdata==2023.3
 uncompyle6==3.9.0
 urllib3==1.26.6
