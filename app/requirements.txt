@@ -28,3 +28,4 @@ tzdata==2023.3
 uncompyle6==3.9.0
 urllib3==1.26.6
 xdis==6.0.5
+flask
