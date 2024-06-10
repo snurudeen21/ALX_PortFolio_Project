@@ -37,16 +37,16 @@ def download_pdf(plastic_limit_1, liquid_limit_1, fines_modulus, D60, D30, D10, 
 
     # Cater for when D30 or D10 are not defined
     try:
-        D_list = "D60 = {} mm    D30 = {} mm     D10 = {} mm".format(round(D60[0],2), round(D30[0],2), round(D10[0],2))
-        Coeff1 = "Coefficient of Uniformity = {}".format(round(C_of_U[0],2))
-        Coeff2 = "Coefficient of Curvature = {}".format(round(C_of_C[0],2))
+        D_list = "D60 = {} mm    D30 = {} mm     D10 = {} mm".format(round(D60,2), round(D30,2), round(D10,2))
+        Coeff1 = "Coefficient of Uniformity = {}".format(round(C_of_U,2))
+        Coeff2 = "Coefficient of Curvature = {}".format(round(C_of_C,2))
 
     except TypeError:
             try: 
-                D_list = "D60 = {} mm    D30 = {} mm".format(round(D60[0],2), round(D30[0],2))
+                D_list = "D60 = {} mm    D30 = {} mm".format(round(D60,2), round(D30,2))
             except TypeError:
                 try:
-                    D_list = "D60 = {} mm".format(round(D60[0],2))
+                    D_list = "D60 = {} mm".format(round(D60,2))
                 except TypeError:
                     pass
 

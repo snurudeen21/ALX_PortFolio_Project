@@ -68,21 +68,31 @@ def generate():
         aashto_class = aashto(_2mm, _425micro_m, _75micro_m, liquid_limit, plastic_limit, PI)
 
         if (file_path):
-            Cu = graph(file_path)
+            D60, D30, D10, CU, CC = graph(file_path)
         else:
-            Cu = alter_graph(_5mm, _2mm, _425micro_m, _75micro_m)
+            D60, D30, D10, CU, CC = alter_graph(_5mm, _2mm, _425micro_m, _75micro_m)
+
+        D60 = round(D60, 3)
+        D30 = round(D30, 3)
+        D10 = round(D10, 3)
+        CU = round(CU, 3)
+        CC = round(CC, 3)
 
         finess_mod = finess_modulus(file_path)
 
-        uscs_class = uscs(PI, liquid_limit, Cu[4], Cu[3], _5mm, _75micro_m, graph_check)    
+        uscs_class = uscs(PI, liquid_limit, CC, CU, _5mm, _75micro_m, graph_check)    
 
-        pdf_file = download_pdf(plastic_limit_1, liquid_limit_1, finess_mod, Cu[0], Cu[1], Cu[2], Cu[3], Cu[4], aashto_class, uscs_class)
+        pdf_file = download_pdf(plastic_limit_1, liquid_limit_1, finess_mod, D60, D30, D10, CU, CC, aashto_class, uscs_class)
         session['pdf_file'] = pdf_file
 
-        my_server(_5mm, _2mm, _425micro_m, _75micro_m, finess_mod, Cu[4], Cu[3], liquid_limit_1, plastic_limit_1, PI, graph_check)
+      
+
+        my_server(_5mm, _2mm, _425micro_m, _75micro_m, finess_mod, CC, CU, liquid_limit_1,
+                    plastic_limit_1, PI, graph_check, aashto_class, uscs_class)
 
         return render_template('generate.html', message="File saved successfully!", file_path=file_path,
-                                    liquid_limit=liquid_limit, plastic_limit=plastic_limit, cu0 = Cu[0],
+                                    liquid_limit=liquid_limit, plastic_limit=plastic_limit, cu0 = D60,
+                                    cu3 = CU, cu4 = CC, cu1 = D30, cu2 = D10,
                                     _5mm=_5mm, _2mm=_2mm, _425micro_m=_425micro_m, _75micro_m=_75micro_m,
                                     uscs_class=uscs_class, aashto_class=aashto_class, finess_mod=finess_mod, pdf_file=pdf_file)
     else:
@@ -94,3 +104,7 @@ def generate():
 def download_file():
     filename = 'soil_report.pdf'
     return send_from_directory(os.path.join(app.root_path, 'static'), filename, as_attachment=True)
+
+@app.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html')
