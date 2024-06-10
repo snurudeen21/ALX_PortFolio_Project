@@ -56,32 +56,41 @@ def graph(file_path):
     D30 = d_datas([30])
     D10 = d_datas([10])
 
+
     #Check if D10, D30 and D60 have values and setting them to zero
     if np.isnan(D10):
-        D10 = 0.0
+        D10 = [0.0]
     if np.isnan(D30):
-        D30 = 0.0
+        D30 = [0.0]
     if np.isnan(D60):
-        D60 = 0.0
+        D60 = [0.0]
 
     #Cheking for D10
-    if D10 <= 0:
-        Coeff_of_Curvature = 0.0
-        Coeff_of_Uniformity = 0.0
+    if D10[0] <= 0:
+        Coeff_of_Curvature = [0.0]
+        Coeff_of_Uniformity = [0.0]
     else:
         Coeff_of_Uniformity = D60/D10
+        #Coeff_of_Uniformity = np.round(Coeff_of_Uniformity, 2)
         Coeff_of_Curvature = (D30**2)/(D60*D10)
+        #Coeff_of_Curvature = np.round(Coeff_of_Curvature, 2)
+
+    '''D60 = np.round(d_datas([60]), 2)
+    D30 = np.round(d_datas([30]), 2)
+    D10 = np.round(d_datas([10]), 2)
     
-    list_D_Cu_CC = []
+    list_D_Cu_CC = [D60, D30,]
     list_D_Cu_CC.append(D60)
     list_D_Cu_CC.append(D30)
     list_D_Cu_CC.append(D10)
     list_D_Cu_CC.append(Coeff_of_Uniformity)
-    list_D_Cu_CC.append(Coeff_of_Curvature)
+    list_D_Cu_CC.append(Coeff_of_Curvature)'''
 
     new_path = (os.path.dirname(__file__)).replace("\\","/")
 
     plt.savefig(new_path+"/static/out_put_graph.png", bbox_inches= "tight", dpi = 95)
     plt.clf()
 
-    return list_D_Cu_CC
+    
+    
+    return D60[0], D30[0], D10[0], Coeff_of_Uniformity[0], Coeff_of_Curvature[0]
