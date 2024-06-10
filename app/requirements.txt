@@ -4,6 +4,7 @@ click==8.1.7
 colorama==0.4.6
 contourpy==1.0.7
 cycler==0.11.0
+flask
 fonttools==4.38.0
 idna==2.10
 Jinja2==3.0.1
@@ -28,4 +29,3 @@ tzdata==2023.3
 uncompyle6==3.9.0
 urllib3==1.26.6
 xdis==6.0.5
-flask
