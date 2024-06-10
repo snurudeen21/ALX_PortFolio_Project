@@ -1,52 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>File Upload</title>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SoilReport Lab</title>
+	<link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
 
-    <h1>Upload File</h1>
 
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".csv">
-        <input type="submit" value="Upload">  
-    </form>   
+    <div class="marq">
+        <marquee behavior="scroll" direction="left" scrollamount="10" scrolldelay="5">Welcome to Soil Analysis Tool! Explore our features and get started with your soil analysis today!</marquee>
+        <h1>SoilReport Lab</h1>
+    </div>
+
+    <div class="container">
+
+    <div class="form-container"> 
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv">
+            <input class="upload" type="submit" value="Upload">  
+        </form>
+        <br>
   
-    <form action="/generate" method="POST" enctype="multipart/form-data">
-        <input type="number" step="0.001" name="5mm" id="myInput1" min="0" required>
-        <input type="number" step="0.001" name="2mm" id="myInput2" min="0" required>
-        <input type="number" step="0.001" name="425micro_m" id="myInput3" min="'0" required>
-        <input type="number" step="0.001" name="75micro_m" id="myInput4" min="0" required>
+        <form action="/generate" method="post" enctype="multipart/form-data">
+            <label for="%passing sieve 5mm">%passing sieve 5mm</label>
+            <input type="number" step="0.001" name="5mm" id="myInput1" required>
+    
+            <label for="%passing sieve 2mm">%passing sieve 2mm</label>
+            <input type="number" step="0.001" name="2mm" id="myInput2" required>
+    
+            <label for="%passing sieve 425 micrometer">%passing sieve 425 micrometer</label>
+            <input type="number" step="0.001" name="425micro_m" id="myInput3" required>
+    
+            <label for="%passing sieve 75 micrometer">%passing sieve 75 micrometer</label>
+            <input type="number" step="0.001" name="75micro_m" id="myInput4" required>
         
         
 
-        <label for="liquidLimit">Liquid Limit</label>
-        <input type="number" step="0.001" id="liquidLimit" name="liquidLimit" placeholder="liquidLimit" min="0" required>
+            <label for="liquidLimit">Liquid Limit</label>
+            <input type="number" step="0.001" id="liquidLimit" name="liquidLimit" min="0" required>
+        
+            <label for="plasticLimit">Plastic Limit</label>
+            <input type="number" step="0.001" id="plasticLimit" name="plasticLimit" min="0" required>
+        
+            <button id="analyze-btn" type="submit">Analyze</button>
     
-        <label for="plasticLimit">Plastic Limit</label>
-        <input type="number" step="0.001" id="plasticLimit" name="plasticLimit" placeholder="plasticLimit" min="0" required>
+        </form>
+        </div>
+
+        <div class="graph-wrapper">
+            <div class="graph-container">
+                <img id="myGraph" width="600" height="400" src="{{ url_for('static', filename='out_put_graph.png') }}" alt="gradation curve">
+            </div>
+                <button id="download-btn" type="submit" onclick="window.location.href='/download/soil_report.pdf'">Download Report</button>
+        </div>
+
+        <div class="report-container">
+            <h3 style="color: blue;"> Soil Classification Report</h3>
+            {% if cu0 %}
+                <span style="font-weight: bold; margin-right: 20px;">D60 = {{ cu0 }}</span>
+            {% endif %}
+            {% if cu1 %}
+                <span style="font-weight: bold; margin-right: 20px;">D30 = {{ cu1 }}</span>
+            {% endif %}
+            {% if cu2 %}
+                <span style="font-weight: bold;">D10 = {{ cu2 }}</span>
+            {% endif %}
+            <h4>Fineness Modulus = {{ finess_mod }}</h4>
+            <h4>Plastic Limit = {{ plastic_limit }}</h4>    
+            <h4>Liquid Limit =  {{ liquid_limit}}</h4>
+
+            {% if cu2 %}
+            <h4>Coefficient of Uniformity = {{ cu3 }}</h4>
+            <h4>Coefficient of Curvature = {{ cu4 }}</h4>
+            {% endif %}
+            <h4 style="color: red;">AASHTO CLASSIFICATION -> {{ aashto_class }}</h4>
+            <h4 style="color: blue;">USCS CLASSIFICATION -> {{ uscs_class }}</h4>
+        </div>
     
-        <input type="submit" value="Analyze">
-    </form>
+      
+    </div>
 
-    <img src="{{ url_for('static', filename='out_put_graph.png') }}" alt="gradation curve">
-
-
-    <input type="button" value="Download PDF" onclick="window.location.href='/download/soil_report.pdf'">
-
-
-    {% if message %}
-        <h2>{{ message }}</h2>
-        <h3>{{file_path}}</h3>
-    {% endif %}
-
-    <h4>LL: {{ liquid_limit }} PL: {{ plastic_limit }}  5mm: {{ _5mm }}</h4>
-    <h4>{{ file_path }}</h4>
-    <h4>{{ cu0 }}</h4>
-    <h4>{{ aashto_class }}</h4>
-    <h4>{{ uscs_class }}</h4>
-    <h4>{{ finess_mod }}</h4>
-    <h4>{{ pdf_file }}</h4>
+    <div id="links">
+        <a class="about-link" href="{{ url_for('about') }}" target="_blank">About</a>
+        <a class="help-link" href="https://youtu.be/GrKoRnCG0Ec?si=zlHD9FCJE7o98Xym" target="_blank">Help</a>
+        <a class="lab-link" href="https://www.researchgate.net/lab/Laplace-Lab-Nurudeen-Adisa-Sulaimon" target="_blank">Visit Laplace Lab</a>
+    </div>
 
 </body>
 </html>
