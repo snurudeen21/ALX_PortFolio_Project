@@ -4,7 +4,7 @@ click==8.1.7
 colorama==0.4.6
 contourpy==1.0.7
 cycler==0.11.0
-flask
+Flask
 fonttools==4.38.0
 idna==2.10
 Jinja2==3.0.1
