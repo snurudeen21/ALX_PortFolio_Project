@@ -24,7 +24,6 @@ requests==2.25.1
 scipy==1.10.1
 six==1.16.0
 spark-parser==1.8.9
-tkdesigner
 tzdata==2023.3
 uncompyle6==3.9.0
 urllib3==1.26.6
