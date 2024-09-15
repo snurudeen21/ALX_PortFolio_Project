@@ -11,7 +11,7 @@ from my_server import my_server
 
 
 app = Flask(__name__)
-app.secret_key = 'Arshavin@21'
+app.secret_key = 'My_Nigga'
 
 def upload_file_path():
             file = request.files['file']
